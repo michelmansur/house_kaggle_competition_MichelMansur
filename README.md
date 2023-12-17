@@ -24,3 +24,8 @@ Intermediário (7,1 - 9): cumpriu 5 dos 6 itens descritos acima;
 Básico (4,1 - 7): cumpriu 4 dos 6 itens descritos acima;
 
 Insuficiente (0 - 4): cumpriu menos que 3 itens descritos acima.
+
+## PONDERADA
+Descreva aqui as diferenças de treinamento que você encontrou entre os treinamentos de Ensemble. Passe por todos os métodos. Descreva as modificações que você porpôs.
+
+## Compreensão do desafio House Kaggle:
