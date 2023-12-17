@@ -36,62 +36,58 @@ A proposta do desafio visa antecipar o custo de residências considerando elemen
 O script do desafio demonstra a aplicação de métodos de Machine Learning para antecipar os valores de propriedades, desde a formatação dos dados, empregando as bibliotecas Pandas e NumPy, até a utilização de algoritmos como Ridge, KNN, SVM, Árvores de Decisão, e assim por diante.
 
 
-## Descrição dos Modelos:
-Agora, segue uma descrição de todos os modelos, incluindo uma comparação.
-## Ridge utilizando log-target:
-Implementa um modelo Ridge para a tarefa de regressão.
-Emprega um pipeline que envolve etapas de pré-processamento (preproc), o modelo Ridge e caching em memória.
-Executa validação cruzada com 5 partições utilizando a métrica rmse (raiz do erro quadrático médio).
-## KNN com Busca em Grade:
-Utiliza o algoritmo K-Nearest Neighbors para regressão.
-Adota um pipeline semelhante ao anterior, incorporando etapas de pré-processamento (preproc), o modelo KNN e caching em memória.
-Realiza uma pesquisa em grade para ajuste dos hiperparâmetros (n_neighbors) por meio de validação cruzada com 3 partições e a métrica rmse.
-## Random Forest com SelectFromModel:
-Implementa um modelo Random Forest para tarefa de regressão.
-Aplica um pipeline que inclui etapas de pré-processamento (preproc), o modelo Random Forest e a seleção de características através do SelectFromModel usando um estimador RandomForestRegressor.
-Efetua validação cruzada com 5 partições utilizando a métrica rmse.
-## SVR com Busca em Grade:
-Utiliza o Support Vector Regressor para regressão.
-Utiliza um pipeline com pré-processamento (preproc) e o modelo SVR. Realiza uma pesquisa em grade para otimização dos hiperparâmetros (C e epsilon) através de validação cruzada com 5 partições e a métrica rmse.
+## Descrição dos Modelos de regressã0:
+Agora, segue uma descrição de todos os modelos de regressão.
+## Ridge Regression
+A abordagem de regressão Ridge representa um procedimento de regularização que introduz um termo de penalização na função de perda, visando mitigar a multicolinearidade em conjuntos de dados que englobam várias variáveis. Para identificar a solução mais adequada, o parâmetro de regularização, designado como Gama, passou por otimização por meio do método GridSearchCV, resultando em um valor otimizado de 2,0.
+
+## K-Nearest Neighbors (KNN):
+Descrição: O algoritmo KNN representa uma técnica de aprendizado supervisionado, efetuando previsões ao calcular a média dos rótulos pertencentes aos k vizinhos mais próximos no espaço de características. Estratégias de Ajuste: Otimização do parâmetro de quantidade de vizinhos (n_neighbors) realizada por meio do método GridSearchCV, com o valor final ajustado para 6. Máquina de Vetores de Suporte - Base Radial
+
+## Function (SVM-RBF):
+Descrição: A SVM com função de base radial (SVM-RBF) é um modelo de máquina de vetores de suporte que utiliza uma função de núcleo radial. Estratégias de Ajuste: Realizou-se a otimização dos parâmetros C e epsilon por meio do GridSearchCV, resultando nos valores ajustados de C=1 e epsilon=0.05.
+
+## Random Forest:
+Descrição: Uma floresta aleatório constitui-se de um conjunto de árvores de escolhas treinadas em amostragens aleatórias extraídas dos dados. Estratégias de Ajuste: Limitação da profundidade máxima para 50 e estabelecimento do número mínimo de amostras em folhas em 20.
+
+
 ## Decision Tree:
-Utiliza uma árvore de decisão para a tarefa de regressão.
-Emprega um pipeline que engloba etapas de pré-processamento (preproc) e o modelo DecisionTreeRegressor.
-Conduz validação cruzada com 5 partições utilizando a métrica rmse.
-## Ensemble (VotingRegressor):
-Combina diversos modelos (Gradient Boosting, AdaBoost, Ridge, SVM) usando o VotingRegressor.
-Emprega um pipeline com pré-processamento (preproc) e o modelo de conjunto.
-Realiza validação cruzada com 5 partições utilizando a métrica rmse.
-## Ensemble (StackingRegressor):
-Utiliza um modelo de empilhamento que acumula os resultados de diferentes modelos (Gradient Boosting, AdaBoost, Ridge, SVM) usando um modelo final de Regressão Linear.
-Adota um pipeline com pré-processamento (preproc) e o modelo de empilhamento.
-Efetua validação cruzada com 5 partições utilizando a métrica rmse.
-## XGBoost com Validação Cruzada:
-Implementa o XGBoost para regressão.
-Emprega um pipeline com pré-processamento (preproc) e o modelo XGBoost.
-Conduz validação cruzada com 5 partições utilizando a métrica rmse.
-## XGBoost com Early Stopping:
-Utiliza o XGBoost com early stopping para prevenir overfitting.
-Realiza treinamento em dois conjuntos (treino e validação) e exibe o gráfico da métrica rmse durante o treinamento.
-Emprega um pipeline com pré-processamento (preproc) e o modelo XGBoost.
+Descrição: Um método de árvore de escolhas separa os dados em seções conforme as características presentes nos dados. Estratégias de Ajuste: Limitação da profundidade máxima para 50 e estabelecimento do número mínimo de amostras em folhas em 20.
+
+
+
+
+## Descrição dos Modelos de Ensemble:
+Agora, segue uma descrição de todos os modelos de Ensemble.
+
+## AdaBoost Regressor:
+Descrição: O AdaBoost é uma técnica de impulsionamento que agrega múltiplos modelos de aprendizado de baixa complexidade. Estratégias de Ajuste: Utilização de Árvore de Escolhas como modelo base.
+
+## Gradient Boosting Regressor:
+Descrição: O Gradient Boosting desenvolve árvores de escolhas de maneira sequencial, retificando as imprecisões dos modelos prévios. Estratégias de Ajuste: Configuração de 100 estimadores.
+
+## Voting Regressor:
+Descrição: O Regressor de Votação agrega as predições de diversos modelos de regressão. Estratégias de Ajuste: Conjunto de Gradient Boosting, AdaBoost, Ridge e SVM com função de base radial.
+
+## Stacking Regressor:
+Descrição: O Regressor de Empilhamento combina vários modelos de regressão. Estratégias de Ajuste: Conjunto com características análogas ao Regressor de Votação.
+
+## XGBoost (Extreme Gradient Boosting):
+
+Descrição: O XGBoost representa um algoritmo de impulsionamento de gradiente eficaz e dimensionável. Estratégias de Ajuste: Profundidade máxima estabelecida em 10, número de estimadores definido como 300, e taxa de aprendizado ajustada para 0.1.
+
+## Comparação dos resultados dos modelos.
+
+A métrica de avaliação utilizada foi o RMSE, e a análise foi realizada considerando a média e o desvio padrão dos resultados durante a validação cruzada. Modelos mais elaborados, como o Gradient Boosting, Voting Regressor e Stacking Regressor, demonstraram RMSE mais reduzido. O XGBoost também exibiu um desempenho consistente. Abordagens como Ridge, KNN e SVM com função de base radial apresentaram resultados competitivos. A seleção do modelo final dependerá de vários fatores, incluindo as características dos dados, a interpretabilidade e os recursos computacionais disponíveis. O ajuste de hiperparâmetros desempenha um papel essencial na otimização do desempenho.
+
 
 
 ## Sugestões para Aprimoramento:
 Agora, segue as sugestões de aprimoramento de codigo do desafio.
-Aprimoramento dos Hiperparâmetros:
-Em relação a cada modelo, é recomendável realizar uma busca mais abrangente de hiperparâmetros, visando otimizar o desempenho.
-Engenharia de Características:
-Investigue a criação de novas características que possam elevar a capacidade preditiva do modelo.
-Análise de Resíduos:
-Conduza uma análise detalhada dos resíduos para compreender melhor as áreas em que os modelos estão apresentando deficiências e ajuste conforme necessário.
-Ajuste de Pesos no Conjunto:
-Experimente ajustar as ponderações dos modelos no conjunto para otimizar o desempenho geral.
-Partições na Validação Cruzada:
-Considere aumentar o número de partições na validação cruzada para avaliar a estabilidade do desempenho do modelo.
-Avaliação de Modelos Individualmente:
-Analise o desempenho de cada modelo individualmente para compreender suas contribuições para o conjunto.
-Identificação e Tratamento de Pontos Atípicos:
-Considere detectar e tratar valores discrepantes nos dados, pois esses podem ter um impacto negativo no desempenho do modelo.
-Experimentação com Outros Modelos:
-Explore algoritmos de regressão adicionais para avaliar se diferentes abordagens podem otimizar o desempenho.
-Lembre-se de ajustar essas sugestões de acordo com a natureza específica do problema e dos dados em questão.
-Essas modificações visam aprimorar o desempenho dos modelos, especialmente quando os alvos (variáveis dependentes) apresentam uma distribuição assimétrica. A aplicação da transformação logarítmica pode contribuir para estabilizar as variações e melhorar a interpretação dos resultados. A busca em grade para otimização de hiperparâmetros é uma prática comum na busca das configurações que maximizem o desempenho do modelo.
+
+
+1. Feature Engineering - Explorar técnicas avançadas de engenharia de características para criar novos atributos relevantes para o problema
+2. Ajuste de Hiperparametros Adicional - Realizar ajuste de hiperparâmetros mais detalhado
+3. Tratamento de Outliers -Investigar a presença de outliers nos dados e considerar estratégias para tratá-los.
+4. Avaliação de sensibilidade -  Realizar análises de sensibilidade para entender a influência de diferentes hiperparâmetros na performance do modelo.
+   
