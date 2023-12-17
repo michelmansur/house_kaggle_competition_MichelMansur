@@ -31,83 +31,67 @@ Descreva aqui as diferenças de treinamento que você encontrou entre os treinam
 ## Compreensão do desafio House Kaggle
 A proposta do desafio visa antecipar o custo de residências considerando elementos como atributos físicos, estado do imóvel, local, entre muito outros.
 
+## Implementação das soluções e utilização de técnicas, algoritmos e bibliotecas:
 
-## Diferenças de Treinamento entre os Métodos de Ensemble
-Regressão Ridge:
+O script do desafio demonstra a aplicação de métodos de Machine Learning para antecipar os valores de propriedades, desde a formatação dos dados, empregando as bibliotecas Pandas e NumPy, até a utilização de algoritmos como Ridge, KNN, SVM, Árvores de Decisão, e assim por diante.
 
-Emprega a técnica de regressão Ridge para realizar previsões.
-Conduz uma pesquisa em grade para identificar o valor mais adequado para alpha, um parâmetro de regularização.
-Vizinhos Mais Próximos (KNN):
 
-Utiliza o regressor KNN para realizar previsões.
-Executa uma pesquisa em grade para determinar o melhor valor para o número de vizinhos (n_neighbors).
-Regressor de Árvore de Decisão:
+## Descrição dos Modelos:
+Agora, segue uma descrição de todos os modelos, incluindo uma comparação.
+## Ridge utilizando log-target:
+Implementa um modelo Ridge para a tarefa de regressão.
+Emprega um pipeline que envolve etapas de pré-processamento (preproc), o modelo Ridge e caching em memória.
+Executa validação cruzada com 5 partições utilizando a métrica rmse (raiz do erro quadrático médio).
+## KNN com Busca em Grade:
+Utiliza o algoritmo K-Nearest Neighbors para regressão.
+Adota um pipeline semelhante ao anterior, incorporando etapas de pré-processamento (preproc), o modelo KNN e caching em memória.
+Realiza uma pesquisa em grade para ajuste dos hiperparâmetros (n_neighbors) por meio de validação cruzada com 3 partições e a métrica rmse.
+## Random Forest com SelectFromModel:
+Implementa um modelo Random Forest para tarefa de regressão.
+Aplica um pipeline que inclui etapas de pré-processamento (preproc), o modelo Random Forest e a seleção de características através do SelectFromModel usando um estimador RandomForestRegressor.
+Efetua validação cruzada com 5 partições utilizando a métrica rmse.
+## SVR com Busca em Grade:
+Utiliza o Support Vector Regressor para regressão.
+Utiliza um pipeline com pré-processamento (preproc) e o modelo SVR. Realiza uma pesquisa em grade para otimização dos hiperparâmetros (C e epsilon) através de validação cruzada com 5 partições e a métrica rmse.
+## Decision Tree:
+Utiliza uma árvore de decisão para a tarefa de regressão.
+Emprega um pipeline que engloba etapas de pré-processamento (preproc) e o modelo DecisionTreeRegressor.
+Conduz validação cruzada com 5 partições utilizando a métrica rmse.
+## Ensemble (VotingRegressor):
+Combina diversos modelos (Gradient Boosting, AdaBoost, Ridge, SVM) usando o VotingRegressor.
+Emprega um pipeline com pré-processamento (preproc) e o modelo de conjunto.
+Realiza validação cruzada com 5 partições utilizando a métrica rmse.
+## Ensemble (StackingRegressor):
+Utiliza um modelo de empilhamento que acumula os resultados de diferentes modelos (Gradient Boosting, AdaBoost, Ridge, SVM) usando um modelo final de Regressão Linear.
+Adota um pipeline com pré-processamento (preproc) e o modelo de empilhamento.
+Efetua validação cruzada com 5 partições utilizando a métrica rmse.
+## XGBoost com Validação Cruzada:
+Implementa o XGBoost para regressão.
+Emprega um pipeline com pré-processamento (preproc) e o modelo XGBoost.
+Conduz validação cruzada com 5 partições utilizando a métrica rmse.
+## XGBoost com Early Stopping:
+Utiliza o XGBoost com early stopping para prevenir overfitting.
+Realiza treinamento em dois conjuntos (treino e validação) e exibe o gráfico da métrica rmse durante o treinamento.
+Emprega um pipeline com pré-processamento (preproc) e o modelo XGBoost.
 
-Emprega uma árvore de decisão para realizar previsões.
-Não incorpora etapas de pré-processamento específicas para este modelo.
-SVR (Regressor de Vetores de Suporte) com Kernel RBF:
 
-Utiliza um regressor de vetores de suporte com kernel RBF para realizar previsões.
-Realiza uma pesquisa em grade para otimizar os parâmetros C (regularização) e epsilon.
-Regressor de Floresta Aleatória:
-
-Utiliza um regressor de floresta aleatória para realizar previsões.
-Conduz uma pesquisa em grade para otimizar os hiperparâmetros da floresta aleatória.
-Regressor AdaBoost:
-
-Utiliza o regressor AdaBoost com uma árvore de decisão como base.
-Não incorpora etapas de pré-processamento específicas para este modelo.
-Regressor de Aumento de Gradiente:
-
-Utiliza o regressor de aumento de gradiente para realizar previsões.
-Não incorpora etapas de pré-processamento específicas para este modelo.
-Voting Regressor:
-
-Combina os resultados de modelos individuais (Gradient Boosting, AdaBoost, Ridge, SVR com Kernel RBF) por meio de votação.
-Não incorpora etapas de pré-processamento específicas para este modelo.
-Stacking Regressor:
-
-Combina os resultados de modelos individuais (Gradient Boosting, AdaBoost, Ridge, SVR com Kernel RBF) usando um meta-regressor linear.
-Não incorpora etapas de pré-processamento específicas para este modelo.
-Regressor XGBoost:
-
-Utiliza o regressor XGBoost para realizar previsões.
-Conduz uma pesquisa em grade para identificar os melhores hiperparâmetros.
-Modificações para Aprimorar o Modelo
-Regressão Ridge:
-
-Aplica um transformador de log nos alvos (y_log).
-Realiza uma pesquisa em grade para identificar o melhor valor de alpha.
-Vizinhos Mais Próximos (KNN):
-
-Aplica um transformador de log nos alvos (y_log).
-Realiza uma pesquisa em grade para identificar o melhor valor para o número de vizinhos (n_neighbors).
-Regressor de Floresta Aleatória:
-
-Aplica um transformador de log nos alvos (y_log).
-Realiza uma pesquisa em grade para otimizar os hiperparâmetros da floresta aleatória.
-SVR com Kernel RBF:
-
-Aplica um transformador de log nos alvos (y_log).
-Realiza uma pesquisa em grade para otimizar os parâmetros C e epsilon.
-Regressor de Árvore de Decisão:
-
-Aplica um transformador de log nos alvos (y_log).
-Regressor AdaBoost:
-
-Aplica um transformador de log nos alvos (y_log).
-Regressor de Aumento de Gradiente:
-
-Aplica um transformador de log nos alvos (y_log).
-Voting Regressor:
-
-Aplica um transformador de log nos alvos (y_log).
-Stacking Regressor:
-
-Aplica um transformador de log nos alvos (y_log).
-Regressor XGBoost:
-
-Aplica um transformador de log nos alvos (y_log).
-Realiza uma pesquisa em grade para identificar os melhores hiperparâmetros.
-Utiliza um conjunto de treinamento e validação para monitorar o desempenho durante o treinamento.
-Essas adaptações têm como objetivo aprimorar o desempenho dos modelos, especialmente quando os alvos (variáveis dependentes) apresentam distribuição assimétrica. A utilização da transformação de log pode contribuir para estabilizar as variações e melhorar a interpretação dos resultados. A pesquisa em grade para otimização de hiperparâmetros é uma prática comum na busca das configurações que maximizem o desempenho do modelo.
+## Sugestões para Aprimoramento:
+Agora, segue as sugestões de aprimoramento de codigo do desafio.
+Aprimoramento dos Hiperparâmetros:
+Em relação a cada modelo, é recomendável realizar uma busca mais abrangente de hiperparâmetros, visando otimizar o desempenho.
+Engenharia de Características:
+Investigue a criação de novas características que possam elevar a capacidade preditiva do modelo.
+Análise de Resíduos:
+Conduza uma análise detalhada dos resíduos para compreender melhor as áreas em que os modelos estão apresentando deficiências e ajuste conforme necessário.
+Ajuste de Pesos no Conjunto:
+Experimente ajustar as ponderações dos modelos no conjunto para otimizar o desempenho geral.
+Partições na Validação Cruzada:
+Considere aumentar o número de partições na validação cruzada para avaliar a estabilidade do desempenho do modelo.
+Avaliação de Modelos Individualmente:
+Analise o desempenho de cada modelo individualmente para compreender suas contribuições para o conjunto.
+Identificação e Tratamento de Pontos Atípicos:
+Considere detectar e tratar valores discrepantes nos dados, pois esses podem ter um impacto negativo no desempenho do modelo.
+Experimentação com Outros Modelos:
+Explore algoritmos de regressão adicionais para avaliar se diferentes abordagens podem otimizar o desempenho.
+Lembre-se de ajustar essas sugestões de acordo com a natureza específica do problema e dos dados em questão.
+Essas modificações visam aprimorar o desempenho dos modelos, especialmente quando os alvos (variáveis dependentes) apresentam uma distribuição assimétrica. A aplicação da transformação logarítmica pode contribuir para estabilizar as variações e melhorar a interpretação dos resultados. A busca em grade para otimização de hiperparâmetros é uma prática comum na busca das configurações que maximizem o desempenho do modelo.
