@@ -28,4 +28,9 @@ Insuficiente (0 - 4): cumpriu menos que 3 itens descritos acima.
 ## PONDERADA
 Descreva aqui as diferenças de treinamento que você encontrou entre os treinamentos de Ensemble. Passe por todos os métodos. Descreva as modificações que você porpôs.
 
-## Compreensão do desafio House Kaggle:
+
+
+
+
+
+
